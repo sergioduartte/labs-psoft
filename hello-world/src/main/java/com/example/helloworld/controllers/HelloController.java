@@ -39,7 +39,7 @@ public class HelloController {
     public ResponseEntity<Saudacao> iae(@RequestParam(name="name", required = false, defaultValue = "Bença") String name, Model model){
         model.addAttribute("name", name);
         String s = defineSaudacao();
-        String complemento = name + "!" ;
+        String complemento = name + ", meu bacano!" ;
         String hora = getHora();
         this.saudacao = new Saudacao(s + complemento, hora);
 
