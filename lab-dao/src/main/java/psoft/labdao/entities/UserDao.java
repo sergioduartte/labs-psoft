@@ -11,26 +11,26 @@ public class UserDao {
     @Id
     private String email;
     private String name;
-    private double senha;
+    private String password;
 
     public UserDao() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public UserDao(long id, String email, String name, double senha) {
+    public UserDao(long id, String email, String name, String password) {
         super();
         this.id = id;
         this.email = email;
         this.name = name;
-        this.senha = senha;
+        this.password = password;
     }
 
-    public UserDao(String email, String name, double senha) {
+    public UserDao(String email, String name, String password) {
         super();
         this.email = email;
         this.name = name;
-        this.senha = senha;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -49,12 +49,12 @@ public class UserDao {
         this.name = name;
     }
 
-    public double getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(double senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public long getId() {

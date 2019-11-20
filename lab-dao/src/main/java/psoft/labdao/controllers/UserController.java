@@ -34,9 +34,9 @@ public class UserController {
         return new ResponseEntity<UserDao>(userService.addUser(user), HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<UserDao> getUser(@PathVariable Long id) {
-        Optional<UserDao> user = userService.getUser(id);
+    @GetMapping("/user/{email}")
+    public ResponseEntity<UserDao> getUser(@PathVariable String email) {
+        Optional<UserDao> user = userService.getUser(email);
         if (user.isPresent())
             return new ResponseEntity<UserDao>(user.get(), HttpStatus.OK);
         return new ResponseEntity<UserDao>(HttpStatus.NOT_FOUND);
