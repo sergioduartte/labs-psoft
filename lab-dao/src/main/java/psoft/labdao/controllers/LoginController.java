@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import psoft.labdao.entities.UserDao;
+import psoft.labdao.services.JWTService;
 import psoft.labdao.services.UserService;
 
 import javax.servlet.ServletException;
