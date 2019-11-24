@@ -5,19 +5,19 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import psoft.labdao.entities.UserDao;
+import psoft.labdao.services.JWTService;
 import psoft.labdao.services.UserService;
+
+import javax.servlet.ServletException;
 
 @RestController
 public class UserController {
 
     private UserService userService;
+    private JWTService jwtService;
 
     public UserController(UserService userService) {
         super();
@@ -40,6 +40,20 @@ public class UserController {
         if (user.isPresent())
             return new ResponseEntity<UserDao>(user.get(), HttpStatus.OK);
         return new ResponseEntity<UserDao>(HttpStatus.NOT_FOUND);
+    }
+    @DeleteMapping
+    public ResponseEntity<UserDao> deleteUser(@PathVariable String email, @RequestHeader("Authorization") String header) {
+        if (userService.getUser(email).isEmpty()) {
+            return new ResponseEntity<UserDao>(HttpStatus.NOT_FOUND);
+        }
+        try {
+            if(jwtService.userHavePermission(header,email)){
+                return new ResponseEntity<UserDao>(userService.deleteUser(email), HttpStatus.OK);
+            }
+        } catch (ServletException e) {
+            return new ResponseEntity<UserDao>(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<UserDao>(HttpStatus.UNAUTHORIZED);
     }
 
 

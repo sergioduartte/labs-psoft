@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import psoft.labdao.daos.UserRepository;
 import psoft.labdao.entities.UserDao;
 
+import javax.servlet.ServletException;
+
 @Service
 public class UserService {
 
@@ -28,4 +30,13 @@ public class UserService {
     }
 
     public Optional<UserDao> getUser(String email) { return userDAO.findByEmail(email); }
+
+    public UserDao deleteUser(String email) throws ServletException {
+        Optional<UserDao> u = userDAO.findByEmail(email);
+        if (u.isPresent()) {
+            userDAO.delete(u.get());
+            return u.get();
+        }
+        throw new ServletException("User not found");
+    }
 }

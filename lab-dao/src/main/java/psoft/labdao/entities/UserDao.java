@@ -1,13 +1,10 @@
 package psoft.labdao.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class UserDao {
-    @GeneratedValue
-    private long id;
     @Id
     private String email;
     private String name;
@@ -18,20 +15,13 @@ public class UserDao {
         // TODO Auto-generated constructor stub
     }
 
-    public UserDao(long id, String email, String name, String password) {
-        super();
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-    }
-
     public UserDao(String email, String name, String password) {
         super();
         this.email = email;
         this.name = name;
         this.password = password;
     }
+
 
     public String getEmail() {
         return email;
@@ -55,10 +45,6 @@ public class UserDao {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public long getId() {
-        return id;
     }
 
     @Override
